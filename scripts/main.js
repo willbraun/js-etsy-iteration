@@ -57,6 +57,4 @@ items.filter(el => el.materials.length >= 8).forEach(item => {
     let materialsList = '';
     item.materials.forEach(material => materialsList += `${material}\n`)
     console.log(`${item.title} has ${item.materials.length} materials:\n\n${materialsList}`);
-})
-
-// 6. 
+});
