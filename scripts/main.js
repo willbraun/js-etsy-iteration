@@ -1,29 +1,23 @@
 // 1. This is a function to calculate the average price in USD of an array of items
-// This function first uses reduce to go through each object in the array and sum the prices
-// There is a check to convert GBP to USD before adding it to the total in USD
-// I did not do i['price'] *= 1.23 because we do not want to mutate the items data
-// Divide by the number of objects in the array to find the average
-// Return a string with the average formatted to two decimal places
+// First we map each item to its price in USD
+// Then we use lodash to find the mean of the prices
+// Return a string with the mean formatted to two decimal places
 
-const averagePriceUSD = arr => {
-    const sumInUSD = arr.reduce((acc, i) => {
-        if (i['currency_code'] === 'GBP') {
-            return acc + (i['price'] * 1.23);
-        }
-        return acc + i['price'];
-        }, 0);
-    const average = sumInUSD/arr.length;
-    return `The average price is $${average.toFixed(2)}`;
-}
-
-console.log(averagePriceUSD(items));
+const average = _.mean(items.map(el => {
+    if (el['currency_code'] === 'GBP') {
+        return el['price'] * 1.23;
+    }
+    return el['price'];
+    }));
+    
+console.log(`The average price is $${average.toFixed(2)}`);
 
 // 2. This function takes an array of items and returns the items that are priced between $14 and $18
-// We want to return an array of objects, so we just need to filter the original array to the elements
+// We want to return an array of objects, so we use lodash to filter the original array to the elements
 // ...whose price is greater than 14 and less than 18
 
 const between14And18 = arr = arr => {
-    const result = arr.filter(el => {
+    const result = _.filter(arr, el => {
         let price = el['price'];
         if (el['currency_code'] === 'GBP') {
             price *= 1.23;
@@ -41,7 +35,7 @@ console.log(between14And18(items));
 // It then returns a string using the name and price properties from that object
 
 const findGBP = arr => {
-    const firstItem = arr.filter(el => el['currency_code'] === 'GBP')[0];
+    const firstItem = _.filter(arr, el => el['currency_code'] === 'GBP')[0];
     return `${firstItem.title} costs £${firstItem.price}`;
 }
 
