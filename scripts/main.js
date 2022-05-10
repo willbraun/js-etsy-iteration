@@ -64,7 +64,8 @@ items.filter(el => el.materials.length >= 8).forEach(item => {
 // Acc starts at 0 so that it can be added to properly
 const selfMade = items.reduce((acc,i) => {
     if (i['who_made'] === 'i_did') {
-        acc++;    
+        return acc + 1;    
     }
+    return acc;
 }, 0);
 console.log(`${selfMade} were made by their sellers`);
