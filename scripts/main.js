@@ -44,12 +44,12 @@ console.log(findGBP(items));
 // 4. This code filters the items that are made of wood, then logs each one to the console using forEach.
 _.forEach(_.filter(items,el => el.materials.includes('wood')), item => console.log(`${item.title} is made of wood.`));
 
-// 5. This code fitlers the items array to those that are made of 8 or more materials
+// 5. This code filters the items array to those that are made of 8 or more materials
 // Then for each item, it uses another forEach to create a list of the materials as a string 
 // Then at the end it logs the item title, number of materials, and the list from the previous step
-items.filter(el => el.materials.length >= 8).forEach(item => {
+_.forEach(_.filter(items, el => el.materials.length >= 8), item => {
     let materialsList = '';
-    item.materials.forEach(material => materialsList += `${material}\n`)
+    _.forEach(item.materials, material => materialsList += `${material}\n`);
     console.log(`${item.title} has ${item.materials.length} materials:\n\n${materialsList}`);
 });
 
