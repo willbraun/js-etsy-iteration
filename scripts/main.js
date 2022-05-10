@@ -42,7 +42,7 @@ const findGBP = arr => {
 console.log(findGBP(items));
 
 // 4. This code filters the items that are made of wood, then logs each one to the console using forEach.
-items.filter(el => el.materials.includes('wood')).forEach(item => console.log(`${item.title} is made of wood.`));
+_.forEach(_.filter(items,el => el.materials.includes('wood')), item => console.log(`${item.title} is made of wood.`));
 
 // 5. This code fitlers the items array to those that are made of 8 or more materials
 // Then for each item, it uses another forEach to create a list of the materials as a string 
