@@ -31,11 +31,10 @@ const between14And18 = arr = arr => {
 console.log(between14And18(items));
 
 // 3. This function finds the item with a GBP currency code and prints its name and price
-// This filters the array to the items that are in GBP, and sets the first object returned to a variable
 // It then returns a string using the name and price properties from that object
 
 const findGBP = arr => {
-    const firstItem = _.filter(arr, el => el['currency_code'] === 'GBP')[0];
+    const firstItem = _.find(arr, el => el['currency_code'] === 'GBP');
     return `${firstItem.title} costs £${firstItem.price}`;
 }
 
@@ -53,13 +52,7 @@ _.forEach(_.filter(items, el => el.materials.length >= 8), item => {
     console.log(`${item.title} has ${item.materials.length} materials:\n\n${materialsList}`);
 });
 
-// 6. This code first uses reduce to go through the items array
-// It only adds to the accumulated value if that item was self made
-// Acc starts at 0 so that it can be added to properly
-const selfMade = items.reduce((acc,i) => {
-    if (i['who_made'] === 'i_did') {
-        return acc + 1;    
-    }
-    return acc;
-}, 0);
+// 6. This code uses lodash countBy to return an object with the counts ways products are made and selects the value of 'i_did'
+// Then it returns that in a string
+const selfMade = _.countBy(items,'who_made')['i_did'];
 console.log(`${selfMade} were made by their sellers`);
