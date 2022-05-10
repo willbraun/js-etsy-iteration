@@ -58,3 +58,13 @@ items.filter(el => el.materials.length >= 8).forEach(item => {
     item.materials.forEach(material => materialsList += `${material}\n`)
     console.log(`${item.title} has ${item.materials.length} materials:\n\n${materialsList}`);
 });
+
+// 6. This code first uses reduce to go through the items array
+// It only adds to the accumulated value if that item was self made
+// Acc starts at 0 so that it can be added to properly
+const selfMade = items.reduce((acc,i) => {
+    if (i['who_made'] === 'i_did') {
+        acc++;    
+    }
+}, 0);
+console.log(`${selfMade} were made by their sellers`);
